@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var course = require('./routes/course');
 var port = process.env.PORT || '3000';
 
 var app = express();
@@ -22,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //route setup
 app.use('/', routes);
 
+// app.use('/api/course/', course);
+
 // error handlers
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
@@ -30,6 +33,8 @@ if (app.get('env') === 'development') {
   });
 }
 
-app.listen(port);
+app.listen(port, function(success, failure) {
+
+}).on('error', function(err) { console.log(err)});
 
 module.exports = app;
