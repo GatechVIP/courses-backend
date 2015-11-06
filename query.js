@@ -17,29 +17,29 @@ function download(url, callback) {
 }
 
 var cheerio = require("cheerio");
-var url = "http://critique.gatech.edu/course.php?id=CS1331"
+var url = "http://critique.gatech.edu/course.php?id=CS2050"
 
 download(url, function(data) {
   if (data) {
-    //console.log(data);
 
     var $ = cheerio.load(data);
     var json = {};
-    // $("div.artSplitter > img.blkBorder").each(function(i, e) {
-    //     console.log($(e).attr("src"));
-    // });
     var tdArr = [];
+    var professorInfo = [];
+    var Pclass = {};
     $('td').each(function() {
-
-    //tdArr = $(this).text();
-    tdArr.push($(this).text());
-
+      //tdArr = $(this).text();
+      tdArr.push($(this).text());
+      console.log($(this).text());
     });
 
     //var tdArr = $('td').$(this).text().toArray();
-    //json.gpa = tdArr[0];
-    console.log(tdArr);
+    json.gpa = tdArr[1] + " A:" + tdArr[2] + "%" + " B:" + tdArr[3] + "%"+ " C:" + tdArr[4] + "%"+ " D:" + tdArr[5] + "%"+ " F:" + tdArr[6] + "%";
+    json.CRN = url.split("=")[1];
 
+    json.pInfo = professorInfo;
+    //console.log(tdArr);
+    console.log(json);
     console.log("done");
 
     // var fs = require('fs');
