@@ -21,13 +21,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 
-// error handlers
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send( err.stack );
-  });
-}
+// error handler
+app.use(function(err, req, res, next) {
+	res.status(err.status || 500);
+	res.send(err);
+});
 
 app.listen(port, function(success, failure) {
 	console.log('server is running on port ' + port);

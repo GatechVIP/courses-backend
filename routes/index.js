@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var coursesJson = require('../public/javascripts/courses.json');
 var fs = require('fs');
+var coursecritique = require('../modules/coursecritique.js');
 //index
 router.get('/', function(req, res, next) {
   res.send('You are now at the index.');
@@ -45,6 +46,21 @@ router.get('/api/course/:subject/:number', function (req, res) {
 			res.send(course);
 		}
 	}
+	res.status(500).send
+	throw error;
 });
+
+/* Course critique query routes.*/
+
+//get course info matching this id
+router.get('/api/coursecritique/:id', function (req, res) {
+	var id = req.params.id;
+	if (id != null) {
+		id = id.toLowerCase();
+		coursecritique.fetchCourse(id).then(function(result) {
+			res.send(result);
+		});
+	}
+})
 
 module.exports = router;
