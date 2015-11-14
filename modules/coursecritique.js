@@ -34,6 +34,39 @@ function handleData(data) {
     json.gpa = tdArr[1] + " A:" + tdArr[2] + "%" + " B:" + tdArr[3] + "%"+ " C:" + tdArr[4] + "%"+ " D:" + tdArr[5] + "%"+ " F:" + tdArr[6] + "%";
     json.CRN = url.split("=")[1];
     json.pInfo = professorInfo;
+    for (var i = 0; i < ((tdArr.length - 7) / 9); i++) {
+      var Pclass = {};
+      professorInfo[i] = Pclass;
+    }
+    for (var i = 7; i < tdArr.length; i++) {
+      if ((i - 7) % 9 == 0) {
+        professorInfo[Math.floor((i-7)/9)].pName = tdArr[i];
+      }
+      if ((i - 7) % 9 == 1) {
+        professorInfo[Math.floor((i-7)/9)].classSize = tdArr[i];
+      }
+      if ((i - 7) % 9 == 2) {
+        professorInfo[Math.floor((i-7)/9)].gpaOverall = tdArr[i];
+      }
+      if ((i - 7) % 9 == 3) {
+        professorInfo[Math.floor((i-7)/9)].A = tdArr[i];
+      }
+      if ((i - 7) % 9 == 4) {
+        professorInfo[Math.floor((i-7)/9)].B = tdArr[i];
+      }
+      if ((i - 7) % 9 == 5) {
+        professorInfo[Math.floor((i-7)/9)].C = tdArr[i];
+      }
+      if ((i - 7) % 9 == 6) {
+        professorInfo[Math.floor((i-7)/9)].D = tdArr[i];
+      }
+      if ((i - 7) % 9 == 7) {
+        professorInfo[Math.floor((i-7)/9)].F = tdArr[i];
+      }
+      if ((i - 7) % 9 == 8) {
+        professorInfo[Math.floor((i-7)/9)].W = tdArr[i];
+      }
+    }
     return json;
   }
   else console.log("error");  
