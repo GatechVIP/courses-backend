@@ -17,7 +17,7 @@ function download(url, callback) {
 }
 
 var cheerio = require("cheerio");
-var url = "http://critique.gatech.edu/course.php?id=CS2050"
+var url = "http://critique.gatech.edu/course.php?id=CS1332"
 
 download(url, function(data) {
   if (data) {
