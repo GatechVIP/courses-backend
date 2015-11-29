@@ -13,7 +13,6 @@ function download(url, id, callback) {
     } else { deffered.reject(err)}
   });
   return deferred.promise // the promise is returned
-
 }
 
 var cheerio = require("cheerio");

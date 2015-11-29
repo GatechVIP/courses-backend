@@ -3,13 +3,14 @@ var router = express.Router();
 var coursesJson = require('../public/javascripts/courses.json');
 var fs = require('fs');
 var coursecritique = require('../modules/coursecritique.js');
+var path = require('path');
 //index
 router.get('/', function(req, res, next) {
-  res.send('You are now at the index.');
+  //send simple html file
+  res.sendFile('index.html');
 });
 
 //routing for providing simple JSON data
-
 
 //get all courses
 router.get('/api/course', function(req, res) {
@@ -31,7 +32,6 @@ router.get('/api/course/:subject', function(req, res) {
 			courses.push(coursesJson[course]);
 		}
 		res.send(courses);
-
 	}
 });
 
