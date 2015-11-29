@@ -4,7 +4,9 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var port = process.env.PORT || '3000';
+
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3000
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 var app = express();
 
@@ -24,10 +26,9 @@ app.use(function(err, req, res, next) {
 	res.send(err);
 });
 
-app.listen(port, function(success, failure) {
-	console.log('server is running on port ' + port);
-}).on('error', function(err) {
-	console.log(err)
+//start the server
+app.listen(server_port, server_ip_address, function(){
+  console.log("Listening on server_port " + server_port)
 });
 
 module.exports = app;
