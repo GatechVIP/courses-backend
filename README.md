@@ -2,7 +2,7 @@
 
 Welcome to courses-backend, an express server setup to deliver information on Georgia Tech courses.
 
-To run the server, navigate to the root directory of the application in the cli and run the command `node app.js`. It is configured to run locally on port number 3000.
+To run the server, navigate to the root directory of the application in the cli and run the command `node app.js`. It is configured to run locally on port number 8080.
 
 ## Using the routes
 
