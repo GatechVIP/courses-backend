@@ -2,6 +2,8 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 
 var routes = require('./routes/index');
 
@@ -10,8 +12,21 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 var app = express();
 
-// view setup
-//other middleware setup
+
+
+
+// middleware setup
+
+// set up mongodb
+var uri = "mongodb://test:123@ds045464.mongolab.com:45464/courses-backend";
+MongoClient.connect(uri, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected correctly to the database server.");
+  db.close();
+});
+
+
+// other middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
