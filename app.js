@@ -2,16 +2,11 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-
-var routes = require('./routes/index');
-
+var monk = require('monk');
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
-
-var app = express();
-
+var app = module.exports = express();
 
 
 
@@ -19,12 +14,9 @@ var app = express();
 
 // set up mongodb
 var uri = "mongodb://test:123@ds045464.mongolab.com:45464/courses-backend";
-MongoClient.connect(uri, function(err, db) {
-  assert.equal(null, err);
-  console.log("Connected correctly to the database server.");
-  db.close();
-});
-
+var db = monk(uri);
+app.db = db;
+//console.log(courses);
 
 // other middleware
 app.use(bodyParser.json());
@@ -33,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname + '/views')));
 
 //route setup
+var routes = require('./routes/index');
 app.use('/', routes);
 
 // error handler
@@ -46,4 +39,4 @@ app.listen(server_port, server_ip_address, function(){
   console.log("Listening on server_port " + server_port)
 });
 
-module.exports = app;
+//module.exports = app;
