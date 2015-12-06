@@ -40,7 +40,7 @@ This app uses `mongodb` as its database type. The app assumes that the database 
 To access this data from the database, use the same queries used for the static info, with the following change to the route:
 
 <pre>
-/api/course/<b>db</b>/...
+/api/<b>db</b>/course/...
 </pre>
 
 
