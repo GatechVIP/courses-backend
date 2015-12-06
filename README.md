@@ -24,6 +24,29 @@ For accessing a specific course:
 
 For example, `/api/course/ACCT/2101`
 
+### Database Query
+
+This app uses `mongodb` as its database type. The app assumes that the database has a collection called `courses` which contains documents of the following structure:
+```json
+{
+  "subject": "ACCT",
+  "number": "2101",
+  "description": "Short description.",
+  "name": "Accounting I"
+}
+```
+
+
+To access this data from the database, use the same queries used for the static info, with the following change to the route:
+
+<pre>
+/api/course/<b>db</b>/...
+</pre>
+
+
+For example, `api/db/course/ACCT/2101`
+
+
 ### Course Critique Query
 
 There is also a route that queries the [coursecritique](https://critique.gatech.edu/) website:
